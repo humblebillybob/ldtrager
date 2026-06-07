@@ -1,66 +1,114 @@
-(function(){'use strict';
-const nav=document.getElementById('nav');
-const navLinks=document.querySelectorAll('.nav-links a');
-const sections=document.querySelectorAll('section[id]');
-function onScroll(){
-  nav.classList.toggle('scrolled',window.scrollY>40);
-  let active='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)active=s.id;});
-  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+active);});
-  const overlay=document.querySelector('.hero-bg-overlay');
-  if(overlay&&window.scrollY<window.innerHeight){overlay.style.transform=`translateY(${window.scrollY*0.25}px)`;}
-}
-window.addEventListener('scroll',onScroll,{passive:true});
-onScroll();
-const revealEls=document.querySelectorAll('.reveal');
-if('IntersectionObserver' in window){
-  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-  revealEls.forEach(el=>obs.observe(el));
-}else{revealEls.forEach(el=>el.classList.add('in'));}
-window.addEventListener('load',()=>{
-  document.querySelectorAll('.hero-text .reveal').forEach((el,i)=>{
-    el.style.opacity='0';el.style.transform='translateY(20px)';
-    el.style.transition=`opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${i*0.12+0.15}s,transform 0.8s cubic-bezier(0.16,1,0.3,1) ${i*0.12+0.15}s`;
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform='translateY(0)';}));
+/* ============================================
+   LISA DONN SERGI TRAGER — main.js
+   ============================================ */
+
+(function () {
+  'use strict';
+
+  // ── NAV scroll state ──────────────────────
+  const nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── Mobile hamburger ──────────────────────
+  const hamburger = document.querySelector('.nav-hamburger');
+  const overlay = document.querySelector('.nav-mobile-overlay');
+
+  hamburger.addEventListener('click', () => {
+    const open = overlay.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
   });
-  const photoCol=document.querySelector('.hero-photo-col');
-  if(photoCol){photoCol.style.opacity='0';photoCol.style.transition='opacity 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s';requestAnimationFrame(()=>requestAnimationFrame(()=>{photoCol.style.opacity='1';}));}
-});
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const id=a.getAttribute('href').slice(1);
-    const target=document.getElementById(id);
-    if(target){e.preventDefault();window.scrollTo({top:target.offsetTop-72,behavior:'smooth'});}
-  });
-});
-const tabBtns=document.querySelectorAll('.track-tab');
-const panels=document.querySelectorAll('.track-panel');
-tabBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const target=btn.dataset.panel;
-    tabBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    panels.forEach(p=>{p.classList.toggle('active',p.id==='panel-'+target);});
-  });
-});
-if('IntersectionObserver' in window){
-  const statEls=document.querySelectorAll('.stat-num[data-target]');
-  const counterObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting)return;
-      const el=e.target,end=parseFloat(el.dataset.target),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'',start=performance.now(),dur=1600;
-      function step(now){const p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3);el.textContent=prefix+Math.round(end*ease)+suffix;if(p<1)requestAnimationFrame(step);}
-      requestAnimationFrame(step);counterObs.unobserve(el);
+
+  overlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      document.body.style.overflow = '';
     });
-  },{threshold:0.5});
-  statEls.forEach(el=>counterObs.observe(el));
-}
-const toggle=document.querySelector('.nav-toggle'),mobileNav=document.querySelector('.mobile-nav'),closeBtn=document.querySelector('.mobile-nav-close');
-if(toggle&&mobileNav){
-  toggle.addEventListener('click',()=>{mobileNav.classList.add('open');document.body.style.overflow='hidden';});
-  const closeFn=()=>{mobileNav.classList.remove('open');document.body.style.overflow='';};
-  closeBtn?.addEventListener('click',closeFn);
-  mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeFn));
-}
-document.querySelectorAll('.tl-item').forEach(item=>{item.setAttribute('tabindex','0');});
+  });
+
+  // ── Scroll reveal ─────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(
+          entry.target.closest('section')?.querySelectorAll('.reveal') || []
+        );
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ── Counter animation ─────────────────────
+  const statValues = document.querySelectorAll('.stat-value[data-target]');
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(eased * target);
+      el.textContent = prefix + value + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statValues.forEach(el => counterObserver.observe(el));
+
+  // ── Tab toggle ────────────────────────────
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      tabContents.forEach(content => {
+        const isTarget = content.id === `tab-${target}`;
+        content.classList.toggle('hidden', !isTarget);
+      });
+    });
+  });
+
+  // ── Parallax hero ─────────────────────────
+  const heroPhoto = document.querySelector('.hero-photo');
+  if (heroPhoto) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight) {
+        const y = window.scrollY * 0.25;
+        heroPhoto.style.transform = `translateY(${y}px)`;
+      }
+    }, { passive: true });
+  }
+
 })();
