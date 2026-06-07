@@ -3,303 +3,317 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lisa Donn Sergi Trager, Esq. — C-Suite Executive, General Counsel &amp; Board Member." />
   <title>Lisa Donn Sergi Trager, Esq.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="site-nav" id="site-nav">
+  <!-- ===================== HERO ===================== -->
+  <!-- Dark left column + photo right, nav bar anchored below -->
+  <section id="hero">
+    <div class="hero-dark-col" aria-hidden="true"></div>
+    <div class="hero-photo-col" aria-hidden="true">
+      <!-- Transparent-bg headshot sits on top of dark col photo -->
+      <img src="images/lisa-headshot.jpg" class="hero-photo-bg" alt="" />
+      <img src="images/lisa-hero.png" class="hero-photo-fg" alt="Lisa Donn Sergi Trager" />
+    </div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-headline">Lisa Donn Sergi<br>Trager, <em>Esq.</em></h1>
+        <p class="hero-roles">C-Suite Executive <span class="dot">·</span> Corporate Attorney <span class="dot">·</span> Board Member</p>
+        <p class="hero-bio">Two decades at the intersection of law, finance, and executive leadership. I've raised capital, closed landmark deals, taken companies public, and led organizations through the hardest conditions.</p>
+        <div class="hero-ctas">
+          <a href="#numbers" class="btn-solid">Background</a>
+          <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NAV ===================== -->
+  <!-- In Figma this sits below hero as a sticky bar -->
+  <nav id="site-nav" aria-label="Primary navigation">
     <div class="nav-inner">
-      <a class="nav-logo" href="#hero">LDST</a>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#expertise">Expertise</a>
-        <a href="#numbers">Background</a>
-        <a href="#headed">Focus</a>
-        <a href="#experience">Experience</a>
-        <a href="#credentials">Credentials</a>
-        <a href="#connect">Connect</a>
-      </nav>
-      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <div class="nav-logo">Lisa Donn Sergi Trager, Esq.</div>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#headed">Focus</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="nav-mobile-overlay">
-      <a href="#about">About</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#numbers">Background</a>
-      <a href="#headed">Focus</a>
-      <a href="#experience">Experience</a>
-      <a href="#credentials">Credentials</a>
-      <a href="#connect">Connect</a>
-    </div>
-  </header>
+  </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-bg-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-eyebrow">C-Suite Executive &nbsp;·&nbsp; Corporate Attorney &nbsp;·&nbsp; Board Member</p>
-        <h1 class="hero-name">Lisa Donn<br>Sergi Trager,<br><em>Esq.</em></h1>
-        <p class="hero-tagline">Two decades at the intersection of law,<br>finance, and executive leadership.</p>
-        <div class="hero-ctas">
-          <a href="#numbers" class="btn btn-solid">Background</a>
-          <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn btn-outline">Connect on LinkedIn</a>
-        </div>
-      </div>
-      <div class="hero-image-wrap">
-        <img src="images/lisa-hero.png" alt="Lisa Donn Sergi Trager" class="hero-photo" />
-      </div>
-    </div>
-  </section>
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <button class="mobile-nav-close" aria-label="Close menu">✕</button>
+    <ul role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#numbers">Numbers</a></li>
+      <li><a href="#headed">Focus</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </div>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-bg-texture"></div>
-    <div class="container about-inner">
-      <div class="about-photo-col">
-        <div class="about-photo-frame">
-          <img src="images/lisa-headshot.jpg" alt="Lisa Donn Sergi Trager" />
-        </div>
-        <div class="about-badge">
-          <span class="badge-number">20+</span>
-          <span class="badge-label">Years of<br>Executive Leadership</span>
-        </div>
-      </div>
-      <div class="about-text-col">
-        <h2 class="section-heading">About Lisa</h2>
-        <p class="about-lead">I've spent two decades building organizations, raising capital, and leading teams through complexity — always with an eye toward what the work ultimately makes possible.</p>
-        <p>My career has spanned Big Four advisory, AmLaw 100 law firms, and the C-suite. I've served as CEO, CFO, General Counsel, and Board Member. I've raised $25MM+ in growth capital, executed a $642MM acquisition, taken a company public, and navigated federal regulatory crises.</p>
-        <p>What draws me to complex work is the clarity it demands. Whether in regulated industries or mission-driven organizations, I bring the same approach: strategic thinking grounded in operational reality, and leadership that holds up under scrutiny.</p>
-        <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="text-link">View Full Profile on LinkedIn →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERTISE -->
-  <section class="expertise" id="expertise">
+  <!-- ===================== ABOUT ===================== -->
+  <!-- White section with geometric texture right side -->
+  <section id="about">
+    <div class="about-texture" aria-hidden="true"></div>
     <div class="container">
-      <h2 class="section-heading light">Areas of Expertise</h2>
+      <div class="about-grid">
+        <div class="about-content">
+          <h2 class="sec-heading reveal">About Lisa</h2>
+          <p class="about-lead reveal">I've spent two decades building organizations, raising capital, and leading teams through complexity — always with an eye toward what the work ultimately makes possible.</p>
+          <p class="about-body reveal">My career has spanned Big Four advisory, AmLaw 100 law firms, and the C-suite. I've served as CEO, CFO, General Counsel, and Board Member. I've raised $25MM+ in growth capital, executed a $642MM acquisition, taken a company public, and navigated federal regulatory crises.</p>
+          <p class="about-body reveal">What draws me to complex work is the clarity it demands. I bring strategic thinking grounded in operational reality, and leadership that holds up under scrutiny.</p>
+          <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="about-link reveal">View Full Profile on LinkedIn →</a>
+        </div>
+        <div class="about-photo-wrap reveal">
+          <img src="images/lisa-headshot.jpg" alt="Lisa Donn Sergi Trager, Esq." class="about-photo" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERTISE ===================== -->
+  <!-- Dark charcoal, 2-col × 3-row card grid -->
+  <section id="expertise">
+    <div class="container">
+      <p class="sec-eyebrow light reveal">Expertise</p>
+      <h2 class="sec-heading light reveal">Where I add the most value.</h2>
       <div class="expertise-grid">
-        <div class="expertise-card">
-          <span class="card-num">01</span>
-          <h3>Capital &amp; Growth</h3>
-          <p>Raised $25MM+ in growth capital. Structured debt and equity financings, managed investor relationships, and built financial systems from the ground up.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">01</p>
+          <h3>Executive Leadership</h3>
+          <p>CEO, CFO, and General Counsel experience with direct P&amp;L ownership, board governance, and enterprise-wide accountability across regulated, high-growth industries.</p>
         </div>
-        <div class="expertise-card">
-          <span class="card-num">02</span>
-          <h3>M&amp;A &amp; Transactions</h3>
-          <p>Led landmark transactions including a $642MM acquisition and the first senior secured debt facility in a regulated sector. Executed IPO on a public exchange.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">02</p>
+          <h3>Capital Markets &amp; Transactions</h3>
+          <p>$25MM+ raised. $642MM M&amp;A executed. IPO on a public exchange. Senior secured debt. Equity financings. Fund formation. Across the full capital stack.</p>
         </div>
-        <div class="expertise-card">
-          <span class="card-num">03</span>
-          <h3>Governance &amp; Risk</h3>
-          <p>Served as Board Member and General Counsel across publicly traded and private organizations. Built governance frameworks ensuring compliance across 14-state footprints.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">03</p>
+          <h3>Legal &amp; Regulatory</h3>
+          <p>Multi-jurisdictional compliance, securities regulation, corporate governance, contract negotiation, and regulatory affairs across 14-state operational footprints.</p>
         </div>
-        <div class="expertise-card">
-          <span class="card-num">04</span>
-          <h3>Operations &amp; Scale</h3>
-          <p>Directed ground-up construction of four properties, restructured organizations for efficiency, and launched award-winning products under pressure.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">04</p>
+          <h3>Finance &amp; Tax</h3>
+          <p>Financial systems design, budget oversight, tax strategy, and alternative investment tax advisory — including ECI and UBTI structures for institutional investors.</p>
         </div>
-        <div class="expertise-card">
-          <span class="card-num">05</span>
-          <h3>Tax &amp; Structuring</h3>
-          <p>Nearly a decade advising institutional investors — private equity funds, hedge funds, REITs, and family offices — on complex domestic and international tax structures.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">05</p>
+          <h3>Crisis Navigation</h3>
+          <p>Led organizations through federal regulatory crises, market volatility, and high-stakes industry disruption. Focused on solutions, stability, and stakeholder confidence.</p>
         </div>
-        <div class="expertise-card">
-          <span class="card-num">06</span>
-          <h3>Crisis Leadership</h3>
-          <p>Led organizations through federal regulatory crises and industry-wide volatility. Maintained stakeholder confidence and operational stability when conditions were hardest.</p>
+        <div class="exp-card reveal">
+          <p class="card-num">06</p>
+          <h3>Board Advisory</h3>
+          <p>Served as Board Member with fiduciary responsibility across multiple organizations. Provides strategic counsel on growth, governance, and transformational decisions.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BY THE NUMBERS -->
-  <section class="numbers" id="numbers">
-    <div class="numbers-bg-texture"></div>
+  <!-- ===================== BY THE NUMBERS ===================== -->
+  <!-- White section, large display stat numbers -->
+  <section id="numbers">
     <div class="container">
-      <h2 class="section-heading light">By the Numbers</h2>
-      <div class="stats-row">
-        <div class="stat-block">
-          <span class="stat-value" data-target="25" data-prefix="$" data-suffix="MM+">$25MM+</span>
+      <h2 class="sec-heading reveal">By the Numbers</h2>
+      <p class="numbers-sub reveal">A track record that speaks for itself.</p>
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="25" data-prefix="$" data-suffix="MM+">$25MM+</span>
           <span class="stat-label">Capital Raised</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-block">
-          <span class="stat-value" data-target="642" data-prefix="$" data-suffix="MM">$642MM</span>
-          <span class="stat-label">Largest M&amp;A Transaction</span>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="642" data-prefix="$" data-suffix="MM">$642MM</span>
+          <span class="stat-label">M&amp;A Transaction Executed</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-block">
-          <span class="stat-value" data-target="20" data-suffix="+">20+</span>
-          <span class="stat-label">Years of Experience</span>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="20" data-suffix="+">20+</span>
+          <span class="stat-label">Years Executive &amp; Legal Leadership</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-block">
-          <span class="stat-value" data-target="14" data-suffix="">14</span>
-          <span class="stat-label">States of Regulatory<br>Oversight</span>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="14">14</span>
+          <span class="stat-label">States Compliance Footprint</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WHERE I'M HEADED -->
-  <section class="headed" id="headed">
-    <div class="headed-bg-texture"></div>
+  <!-- ===================== WHERE I'M HEADED ===================== -->
+  <!-- Dark charcoal, geometric texture right, tab toggle, 2 CTAs -->
+  <section id="headed">
+    <div class="headed-texture" aria-hidden="true"></div>
     <div class="container">
-      <h2 class="section-heading light">Where I'm Headed</h2>
-      <p class="headed-intro">I'm seeking executive leadership opportunities in two tracks — each drawing on a different dimension of what I bring.</p>
-      <div class="tab-row">
-        <button class="tab-btn active" data-tab="industry">Industry</button>
-        <button class="tab-btn" data-tab="ngo">NGO &amp; Mission-Driven</button>
+      <p class="sec-eyebrow light reveal">Where I'm Headed</p>
+      <h2 class="sec-heading light reveal">Two tracks. <em>One leader.</em></h2>
+      <p class="headed-intro reveal">Lisa brings the same depth of experience to two distinct contexts. Select the one that fits your organization.</p>
+
+      <div class="track-tabs reveal">
+        <button class="track-tab active" data-panel="industry">Industry &amp; Corporate</button>
+        <button class="track-tab" data-panel="ngo">NGO &amp; Mission-Driven</button>
       </div>
-      <div class="tab-content" id="tab-industry">
-        <div class="tab-inner">
-          <div class="tab-text">
-            <h3>Growth-Stage &amp; Established Companies</h3>
-            <p>I'm looking for organizations ready to scale — where strategic vision, financial expertise, and operational execution need to work together. My background in capital markets, M&amp;A, and regulated industries makes me a strong fit for complex environments where legal and financial leadership intersect.</p>
-            <p>Roles of interest: CEO, CFO, General Counsel, Board Member</p>
+
+      <div class="track-panel active" id="panel-industry">
+        <div class="track-content">
+          <div class="track-text">
+            <p class="track-intro">For growth-stage and established companies that need executive leadership with the legal, financial, and operational range to operate at the highest level and get deals done.</p>
+            <p class="track-focus-label">Focus Areas</p>
+            <ul class="track-list">
+              <li>Capital formation and M&amp;A execution</li>
+              <li>IPO readiness and public markets</li>
+              <li>General Counsel and enterprise legal strategy</li>
+              <li>CFO-level financial oversight and systems</li>
+              <li>Crisis management and regulatory navigation</li>
+              <li>Board governance and strategic advisory</li>
+            </ul>
+            <div class="track-ctas">
+              <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">View on LinkedIn</a>
+              <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-ghost">Connect on LinkedIn</a>
+            </div>
           </div>
-          <div class="tab-tags">
-            <span class="pill">Capital Markets</span>
-            <span class="pill">M&amp;A</span>
-            <span class="pill">Corporate Governance</span>
-            <span class="pill">Regulatory Affairs</span>
-            <span class="pill">IPO &amp; Public Markets</span>
-            <span class="pill">Tax Strategy</span>
-            <span class="pill">Fund Formation</span>
-            <span class="pill">P&amp;L Leadership</span>
+          <div class="track-pills">
+            <p class="pills-label">Key Capabilities</p>
+            <div class="pills-wrap">
+              <span>P&amp;L Ownership</span><span>M&amp;A</span><span>IPO Execution</span>
+              <span>Fund Formation</span><span>Securities Law</span><span>Tax Strategy</span>
+              <span>Board Governance</span><span>Capital Markets</span>
+              <span>Regulatory Affairs</span><span>Crisis Leadership</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="tab-content hidden" id="tab-ngo">
-        <div class="tab-inner">
-          <div class="tab-text">
-            <h3>Nonprofits &amp; Mission-Driven Organizations</h3>
-            <p>What draws me to mission-driven work is the clarity of purpose. Nonprofits and NGOs operate under constraints that demand resourcefulness, integrity, and genuine commitment — those are the conditions where I do my best work. I understand fundraising, donor accountability, board governance, and the discipline required to maximize impact with limited resources.</p>
-            <p>Roles of interest: Executive Director, CEO, CFO, General Counsel, Board Member</p>
+
+      <div class="track-panel" id="panel-ngo">
+        <div class="track-content">
+          <div class="track-text">
+            <p class="track-intro">For nonprofits and NGOs that need executive leadership with the financial discipline, governance expertise, and strategic vision to advance mission and ensure long-term sustainability.</p>
+            <p class="track-focus-label">Focus Areas</p>
+            <ul class="track-list">
+              <li>Fundraising strategy and capital development</li>
+              <li>Financial stewardship and budget oversight</li>
+              <li>Board governance and fiduciary leadership</li>
+              <li>Organizational resilience and change management</li>
+              <li>Stakeholder and community engagement</li>
+              <li>Regulatory compliance and ethical leadership</li>
+            </ul>
+            <div class="track-ctas">
+              <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">View on LinkedIn</a>
+              <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-ghost">Connect on LinkedIn</a>
+            </div>
           </div>
-          <div class="tab-tags">
-            <span class="pill">Fundraising</span>
-            <span class="pill">Board Governance</span>
-            <span class="pill">Financial Stewardship</span>
-            <span class="pill">Stakeholder Relations</span>
-            <span class="pill">Regulatory Compliance</span>
-            <span class="pill">Mission Alignment</span>
-            <span class="pill">Community Impact</span>
-            <span class="pill">Crisis Navigation</span>
+          <div class="track-pills">
+            <p class="pills-label">Key Capabilities</p>
+            <div class="pills-wrap">
+              <span>Fundraising</span><span>Financial Stewardship</span>
+              <span>Board Relations</span><span>Strategic Planning</span>
+              <span>Crisis Navigation</span><span>Donor Cultivation</span>
+              <span>Mission Alignment</span><span>Community Advocacy</span>
+              <span>Ethical Governance</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section class="experience" id="experience">
-    <div class="experience-bg-texture"></div>
+  <!-- ===================== EXPERIENCE ===================== -->
+  <!-- White, left-aligned timeline with colored accents -->
+  <section id="experience">
     <div class="container">
-      <h2 class="section-heading">Experience</h2>
+      <h2 class="sec-heading reveal">Experience</h2>
+      <p class="exp-intro reveal">From Big Four advisory and AmLaw 100 firms to the C-suite of regulated, high-growth companies.</p>
+
       <div class="timeline">
 
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2020 – 2025</span>
-            <span class="timeline-location">Boston, MA</span>
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2020 – 2025</p>
+            <p class="tl-place">The Boston Garden · Boston, MA</p>
           </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Board Member, CFO &amp; General Counsel</h3>
-            <p class="timeline-org">The Boston Garden</p>
-            <p>Instrumental in raising $25MM+ in capital to expand retail footprint across Massachusetts and New Jersey. Directed the ground-up rebuild of four historic properties, managing competitive bids, change-order processes, and milestone-based payments through June 2025 completion. Established comprehensive accounting and operating systems and analyzed IRC §471(c) applicability.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2020 – Present</span>
-            <span class="timeline-location">Los Angeles, CA</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Principal</h3>
-            <p class="timeline-org">Lisa Donn Sergi, Esq.</p>
-            <p>Delivered legal, tax, and business consulting to asset management funds, closely held companies, and accounting advisors. Advised on Asia-focused venture fund tax issues for non-U.S. investors, facilitated fund creation with large pension plan investors, and guided optimal ESOP structuring for closely held partnerships.</p>
+          <div class="tl-body">
+            <h3>Board Member, CFO &amp; General Counsel</h3>
+            <p>Raised $25MM+ in capital to expand retail footprint across Massachusetts and New Jersey. Directed the ground-up rebuild of four historic properties, managing competitive bids, change-order processes, and milestone-based payments through June 2025 completion. Established comprehensive accounting and operating systems and analyzed IRC §471(c) applicability.</p>
           </div>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2019 – 2020</span>
-            <span class="timeline-location">San Francisco, CA</span>
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2020 – Present</p>
+            <p class="tl-place">Lisa Donn Sergi, Esq. · Los Angeles, CA</p>
           </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">President &amp; CEO, General Counsel, Board Advisor</h3>
-            <p class="timeline-org">PAX Labs, Inc.</p>
-            <p>Full executive leadership of a premium consumer products company. Launched ERA Pro — the company's first new product in three years — earning TIME's Best of CES 2020. Navigated a federal regulatory crisis coordinating directly with state and federal officials. Advised the Board on IPO readiness, recapitalization, and restructuring of U.S. and international subsidiaries.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2018 – 2019</span>
-            <span class="timeline-location">Los Angeles, CA</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">General Counsel &amp; Board Member</h3>
-            <p class="timeline-org">MedMen Enterprises, LLC (CSE: MMEN)</p>
-            <p>Chief legal officer and Board Member for a publicly traded organization. Executed the Up-C IPO on the Canadian Securities Exchange (May 2018), negotiated and closed the $642MM Pharmacann acquisition, and secured the industry's first senior secured debt financing. Spearheaded the creation and spin-off of Treehouse REIT.</p>
+          <div class="tl-body">
+            <h3>Principal</h3>
+            <p>Delivered legal, tax, and business consulting to asset management funds, closely held companies, and accounting advisors. Advised on Asia-focused venture fund tax issues for non-U.S. investors, facilitated fund creation with large pension plan investors, and guided ESOP structuring for closely held partnerships.</p>
           </div>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2014 – 2018</span>
-            <span class="timeline-location">Los Angeles, CA</span>
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2019 – 2020</p>
+            <p class="tl-place">PAX Labs, Inc. · San Francisco, CA</p>
           </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Senior Principal, Investment Management Tax</h3>
-            <p class="timeline-org">Deloitte Tax, LLP</p>
-            <p>Lead tax partner for the Los Angeles office's largest client — a private equity real estate fund with $30B+ AUM — directing a global team delivering 25,000+ annual service hours. Advised private equity funds, hedge funds, direct lending funds, and REITs on complex domestic and international tax structures including ECI, UBTI, and FIRPTA.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2012 – 2014</span>
-            <span class="timeline-location">Los Angeles, CA</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Principal &amp; Practice Leader</h3>
-            <p class="timeline-org">Rothstein Kass (merged with KPMG, 2014)</p>
-            <p>Managed the Los Angeles Alternative Investments Tax Practice and served as International Tax Practice Leader for the Western Region. Generated $25MM+ in annual fees, leading a team of 40+ professionals across domestic and international alternative investment engagements.</p>
+          <div class="tl-body">
+            <h3>President &amp; CEO, General Counsel &amp; Board Advisor</h3>
+            <p>Led full executive operations through a federal regulatory crisis. Launched ERA Pro — the company's first new product in three years — earning TIME's Best of CES 2020. Advised the Board on IPO readiness, recapitalization, and restructuring of U.S. and international subsidiaries. Managed compliance across 14 states.</p>
           </div>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2011 – 2012</span>
-            <span class="timeline-location">Los Angeles, CA</span>
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2018 – 2019</p>
+            <p class="tl-place">MedMen Enterprises, LLC (CSE: MMEN) · Los Angeles, CA</p>
           </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Tax Director</h3>
-            <p class="timeline-org">Anderson Tax</p>
-            <p>Led the alternative investment tax practice in Los Angeles, counseling clients on fund formation, fund accounting, and portfolio company investments across domestic and international matters.</p>
+          <div class="tl-body">
+            <h3>General Counsel &amp; Board Member</h3>
+            <p>Executed a $642MM acquisition, an Up-C IPO on the Canadian Securities Exchange, and the cannabis industry's first senior secured debt financing. Spearheaded the creation and spin-off of Treehouse Real Estate Investment Trust. Managed nationwide legal operations across finance, corporate development, supply chain, and retail.</p>
           </div>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-dates">2003 – 2010</span>
-            <span class="timeline-location">Los Angeles, CA</span>
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2014 – 2018</p>
+            <p class="tl-place">Deloitte Tax, LLP · Los Angeles, CA</p>
           </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Senior Tax Associate / Business Tax Associate</h3>
-            <p class="timeline-org">Proskauer Rose, LLP &nbsp;·&nbsp; O'Melveny &amp; Myers, LLP</p>
-            <p>Built foundational expertise in legal strategy and complex transaction management at two AmLaw 100 international law firms. Advised on M&amp;A, fund formation, joint ventures, restructurings, partnership transactions, and real estate investments.</p>
+          <div class="tl-body">
+            <h3>Senior Principal, Investment Management Tax</h3>
+            <p>Lead tax partner for a $30B+ AUM private equity real estate fund — the Los Angeles office's largest engagement. Directed a global team delivering 25,000+ annual service hours. Advised private equity funds, hedge funds, direct lending funds, and REITs on complex domestic and international tax structures.</p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2012 – 2014</p>
+            <p class="tl-place">Rothstein Kass (merged with KPMG) · Los Angeles, CA</p>
+          </div>
+          <div class="tl-body">
+            <h3>Principal &amp; Practice Leader</h3>
+            <p>Managed the Los Angeles Alternative Investments Tax Practice and served as International Tax Practice Leader for the Western Region. Generated $25MM+ in annual fees, leading a team of 40+ professionals.</p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-meta">
+            <p class="tl-period">2003 – 2012</p>
+            <p class="tl-place">Anderson Tax · Proskauer Rose · O'Melveny &amp; Myers</p>
+          </div>
+          <div class="tl-body">
+            <h3>Earlier Career</h3>
+            <p>Built foundational expertise across AmLaw 100 law firms and specialty tax practice. Advised on M&amp;A, fund formation, joint ventures, restructurings, partnership transactions, and real estate investments at O'Melveny &amp; Myers and Proskauer Rose. Led alternative investment tax practice at Anderson Tax.</p>
           </div>
         </div>
 
@@ -307,58 +321,55 @@
     </div>
   </section>
 
-  <!-- CREDENTIALS -->
-  <section class="credentials" id="credentials">
-    <div class="container">
-      <h2 class="section-heading light">Credentials</h2>
-      <div class="cred-grid">
-        <div class="cred-card reveal">
-          <div class="cred-icon">⚖️</div>
-          <h3>Juris Doctorate</h3>
-          <p>UCLA School of Law<br>Los Angeles, CA</p>
-          <div class="cred-photo-wrap">
-            <img src="images/ucla-law.png" alt="UCLA School of Law" class="cred-photo" />
-          </div>
-        </div>
-        <div class="cred-card reveal">
-          <div class="cred-icon">🎓</div>
-          <h3>Bachelor of Arts, Economics</h3>
-          <p>Oberlin College<br>Oberlin, OH</p>
-        </div>
-        <div class="cred-card reveal">
-          <div class="cred-icon">📜</div>
-          <h3>Bar Admission</h3>
-          <p>Attorney, State Bar of California</p>
-        </div>
-        <div class="cred-card reveal">
-          <div class="cred-icon">🏛️</div>
-          <h3>Professional Affiliations</h3>
-          <p>American Bar Association<br>California State Bar</p>
-        </div>
-      </div>
+  <!-- ===================== CONNECT ===================== -->
+  <!-- Dark, full-bleed image background, split content -->
+  <section id="connect">
+    <div class="connect-img-wrap" aria-hidden="true">
+      <img src="images/ucla-law.png" alt="" class="connect-bg-img" />
+      <div class="connect-img-overlay"></div>
     </div>
-  </section>
-
-  <!-- CONNECT -->
-  <section class="connect" id="connect">
-    <div class="connect-bg-texture"></div>
     <div class="container connect-inner">
-      <div class="connect-text">
-        <h2 class="section-heading light">Let's Connect</h2>
-        <p>If you're building something significant and need a leader who combines strategic vision with operational execution, I'd welcome a conversation.</p>
-        <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn btn-solid">Connect on LinkedIn</a>
+      <div class="connect-left">
+        <p class="sec-eyebrow light reveal">Connect</p>
+        <h2 class="connect-headline reveal">Let's talk about<br><em>what's next.</em></h2>
+        <p class="connect-body reveal">If you're looking for executive leadership, board advisory, or general counsel support, reach out on LinkedIn.</p>
+        <div class="connect-creds reveal">
+          <div class="cred-item">
+            <p class="cred-label">Juris Doctorate</p>
+            <p class="cred-value">UCLA School of Law</p>
+          </div>
+          <div class="cred-item">
+            <p class="cred-label">Bar Admission</p>
+            <p class="cred-value">State of California</p>
+          </div>
+          <div class="cred-item">
+            <p class="cred-label">Bachelor of Arts, Economics</p>
+            <p class="cred-value">Oberlin College</p>
+          </div>
+          <div class="cred-item">
+            <p class="cred-label">Professional Affiliations</p>
+            <p class="cred-value">American Bar Association · California State Bar</p>
+          </div>
+        </div>
       </div>
-      <div class="connect-photo-wrap">
-        <img src="images/lisa-laughing.jpg" alt="Lisa Donn Sergi Trager" class="connect-photo" />
+      <div class="connect-right">
+        <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid reveal">Connect on LinkedIn →</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span class="footer-name">Lisa Donn Sergi Trager, Esq.</span>
-      <span class="footer-copy">© Lisa Donn Sergi Trager. All rights reserved.</span>
+  <!-- ===================== FOOTER ===================== -->
+  <!-- Split: dark text left, laughing photo right -->
+  <footer id="footer">
+    <div class="footer-left">
+      <h2 class="footer-name">Lisa Donn Sergi<br>Trager, <em>Esq.</em></h2>
+      <p class="footer-tagline">C-Suite Executive · Corporate Attorney · Board Member</p>
+      <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid footer-btn">Connect on LinkedIn</a>
+      <p class="footer-copy">© Lisa Donn Sergi Trager. All rights reserved.</p>
+      <p class="footer-loc">Los Angeles, CA</p>
+    </div>
+    <div class="footer-photo-wrap" aria-hidden="true">
+      <img src="images/lisa-laughing.jpg" alt="" class="footer-photo" />
     </div>
   </footer>
 
