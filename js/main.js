@@ -2,26 +2,24 @@
   'use strict';
 
   /* ── Rose rule: position exactly below hero-name after fonts load ──
-     Rule is position:absolute on #hero (z-index:1).
-     Photo-wrap is z-index:2 so it renders ON TOP of the rule.
-     We measure hero-name's bottom edge relative to #hero top.
+     Rule is position:absolute inside .hero-top (position:relative).
+     So top is measured relative to .hero-top's top edge.
+     Photo-wrap is z-index:2 in #hero context so it renders over rule.
   ----------------------------------------------------------------- */
   function positionHeroRule() {
-    const hero = document.getElementById('hero');
     const name = document.getElementById('hero-name');
     const rule = document.getElementById('hero-rule');
-    if (!hero || !name || !rule) return;
-    const heroRect = hero.getBoundingClientRect();
-    const nameRect = name.getBoundingClientRect();
-    rule.style.top = (nameRect.bottom - heroRect.top) + 'px';
+    if (!name || !rule) return;
+    // top relative to .hero-top = name's offsetTop + name's offsetHeight
+    rule.style.top = (name.offsetTop + name.offsetHeight) + 'px';
   }
 
-  // Run after fonts load for accurate measurement, then on resize
+  // Run immediately, after fonts load, and on resize
+  positionHeroRule();
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(positionHeroRule);
-  } else {
-    window.addEventListener('load', positionHeroRule);
   }
+  window.addEventListener('load', positionHeroRule);
   window.addEventListener('resize', positionHeroRule, { passive: true });
 
   /* ── Sticky nav ─────────────────────────────────────────────────
