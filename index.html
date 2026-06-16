@@ -12,18 +12,20 @@
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO — nav lives inside here so it overlaps the photo on desktop -->
   <section id="hero">
     <div class="hero-photo-wrap">
       <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-photo" />
       <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
     </div>
     <div class="hero-overlay"></div>
+
+    <!-- Rose rule sits on #hero directly so it runs full viewport width -->
+    <div class="hero-rule"></div>
+
     <div class="hero-content">
       <div class="hero-top">
         <h1 class="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
-        <!-- Full-width rose rule running edge to edge behind the transparent photo -->
-        <div class="hero-rule"></div>
         <p class="hero-roles">C-Suite Executive &nbsp;&middot;&nbsp; General Counsel &nbsp;&middot;&nbsp; Board Member</p>
       </div>
       <div class="hero-bottom">
@@ -34,33 +36,36 @@
         </div>
       </div>
     </div>
+
+    <!-- Nav inside hero — sits at very bottom, runs behind photo on desktop -->
+    <nav id="site-nav">
+      <div class="nav-inner">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li class="sep">|</li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li class="sep">|</li>
+          <li><a href="#headed">Industry &amp; NGO</a></li>
+          <li class="sep">|</li>
+          <li><a href="#experience">Experience</a></li>
+          <li class="sep">|</li>
+          <li><a href="#credentials">Credentials</a></li>
+          <li class="sep">|</li>
+          <li><a href="#connect">Connect</a></li>
+          <li class="sep">|</li>
+          <li>
+            <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="nav-li" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
   </section>
 
-  <!-- NAV -->
-  <nav id="site-nav">
-    <div class="nav-inner">
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li class="sep">|</li>
-        <li><a href="#expertise">Expertise</a></li>
-        <li class="sep">|</li>
-        <li><a href="#headed">Industry &amp; NGO</a></li>
-        <li class="sep">|</li>
-        <li><a href="#experience">Experience</a></li>
-        <li class="sep">|</li>
-        <li><a href="#credentials">Credentials</a></li>
-        <li class="sep">|</li>
-        <li><a href="#connect">Connect</a></li>
-      </ul>
-      <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="nav-li" aria-label="LinkedIn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-
   <div class="mobile-nav" id="mobile-nav">
-    <button class="mobile-close">✕</button>
+    <button class="mobile-close">&#x2715;</button>
     <a href="#about">About</a>
     <a href="#expertise">Expertise</a>
     <a href="#headed">Industry &amp; NGO</a>
@@ -88,7 +93,6 @@
   </section>
 
   <!-- EXPERTISE -->
-  <!-- The wave bg continues from about — it's all one continuous dark-to-light transition -->
   <section id="expertise">
     <div class="expertise-waves" aria-hidden="true"></div>
     <div class="container">
@@ -138,7 +142,6 @@
     <div class="container">
       <p class="eyebrow">B Y &nbsp; T H E &nbsp; N U M B E R S</p>
       <h2 class="serif-headline navy reveal">A track record that speaks for<br>itself.</h2>
-      <!-- Stats overflow intentionally — horizontal scroll on small screens -->
       <div class="stats-row">
         <div class="stat-item reveal">
           <span class="stat-num" data-target="25" data-prefix="$" data-suffix="MM+">$25MM+</span>
@@ -293,7 +296,7 @@
     </div>
   </section>
 
-  <!-- CONNECT + FOOTER — single dark section, laughing photo right, left-bordered content left -->
+  <!-- CONNECT + FOOTER -->
   <section id="connect">
     <div class="connect-photo-wrap" aria-hidden="true">
       <img src="img/lisa-laughing.webp" alt="" class="connect-photo" />
@@ -301,7 +304,6 @@
     <div class="container connect-container">
       <p class="eyebrow light reveal">C O N N E C T</p>
       <div class="eyebrow-rule light"></div>
-      <!-- Left border runs continuously from headline through CTA and footer info -->
       <div class="left-bordered light reveal">
         <h2 class="serif-headline white connect-head">Let's talk about<br>what's next.</h2>
         <p class="connect-body">If you're looking for executive leadership, board advisory, or general counsel support, reach out on LinkedIn. That's where I'm most responsive.</p>
@@ -309,7 +311,7 @@
         <div class="footer-block">
           <p class="footer-name">LISA DONN SERGI TRAGER, ESQ.</p>
           <p class="footer-loc">Los Angeles, CA</p>
-          <p class="footer-copy">© Lisa Donn Sergi Trager. All rights reserved.</p>
+          <p class="footer-copy">&copy; Lisa Donn Sergi Trager. All rights reserved.</p>
         </div>
       </div>
     </div>
