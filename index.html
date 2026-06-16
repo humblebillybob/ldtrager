@@ -14,16 +14,20 @@
 
   <!-- HERO -->
   <section id="hero">
+    <!-- Rose rule FIRST in DOM — photo and overlay render over it via z-index.
+         JS positions its top dynamically after fonts load. -->
+    <div class="hero-rule" id="hero-rule"></div>
+
+    <!-- Photo AFTER rule so it paints on top -->
     <div class="hero-photo-wrap">
       <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-photo" />
       <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
     </div>
     <div class="hero-overlay"></div>
+
     <div class="hero-content">
       <div class="hero-top">
-        <h1 class="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
-        <!-- Rose rule: full viewport width, sits between name and roles -->
-        <div class="hero-rule"></div>
+        <h1 class="hero-name" id="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
         <p class="hero-roles">C-Suite Executive &nbsp;&middot;&nbsp; General Counsel &nbsp;&middot;&nbsp; Board Member</p>
       </div>
       <div class="hero-bottom">
@@ -36,8 +40,6 @@
     </div>
   </section>
 
-  <!-- NAV: outside hero so sticky works correctly -->
-  <!-- A sentinel div lets JS know when nav reaches viewport top -->
   <div id="nav-sentinel"></div>
   <nav id="site-nav">
     <div class="nav-inner">
