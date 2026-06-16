@@ -1,6 +1,6 @@
 /* ================================================================
-   LISA DONN SERGI TRAGER — style.css v8
-   Hero + nav precision fixes
+   LISA DONN SERGI TRAGER — style.css v9
+   Rose rule fix: tracks below name using margin escape
    ================================================================ */
 
 :root {
@@ -152,22 +152,6 @@ a { color: inherit; text-decoration: none; }
   );
 }
 
-/* Rose rule: full viewport width, z-index 2 (above overlay, below content).
-   Absolutely positioned so it sits between hero-top and hero-bottom.
-   top value is set by the hero-top block height via a CSS custom property
-   trick — we use a fixed approximate offset that works at all sizes. */
-.hero-rule {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  height: 1px;
-  background: var(--rose);
-  /* Sits just below the name text + margin. hero-content has 44px top padding,
-     hero-name is ~2.4rem ≈ ~50px, margin-bottom 14px = ~108px from top */
-  top: 108px;
-}
-
 .hero-content {
   position: relative;
   z-index: 3;
@@ -181,39 +165,66 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
 }
 
-/* Name */
+/* Name — the ::after pseudo creates the rose rule.
+   It escapes the container using left/right margin trick
+   so it runs full viewport width behind the photo. */
 .hero-name {
   font-family: var(--serif);
   font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   font-weight: 400;
   letter-spacing: 0.07em;
   color: var(--white);
-  margin-bottom: 14px;
+  margin-bottom: 0;
   white-space: nowrap;
+  position: relative;
 }
 
-/* Roles — mixed case, wider tracking, below rule */
+/* Rose rule: renders as ::after on hero-name so it
+   always sits immediately below the text.
+   Negative left/right margins break out of container
+   to reach full viewport width. */
+.hero-name::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--rose);
+  margin-top: 12px;
+  margin-bottom: 12px;
+  /* Break out of .hero-content's padding */
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
+  /* Also need to escape the max-width container.
+     At very wide viewports the container centers at 1200px,
+     so we need extra overflow. Use vw-based negative margins. */
+  width: calc(100% + (2 * var(--gutter)));
+  /* Ensure it sits behind content but above overlay */
+  position: relative;
+  z-index: 0;
+}
+
+/* Roles — sits naturally after the ::after rule */
 .hero-roles {
   font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 300;
-  letter-spacing: 0.22em;   /* wider spacing matching Figma */
+  letter-spacing: 0.22em;
   color: rgba(255,255,255,0.55);
-  margin-top: 14px;          /* pushes below the rose rule */
-  /* NO text-transform: uppercase */
+  margin-top: 0;
 }
 
-/* Bottom block: headline + CTAs, with breathing room above nav */
+/* Remove the old standalone .hero-rule div styles */
+.hero-rule { display: none; }
+
 .hero-bottom {
   max-width: 640px;
-  padding-bottom: 40px;    /* space between CTAs and nav bar */
+  padding-bottom: 40px;
 }
 
 .hero-headline {
   font-family: var(--sans);
   font-size: clamp(1.8rem, 3.4vw, 3rem);
-  font-weight: 400;          /* regular weight, not light */
-  line-height: 1.22;         /* tighter than before */
+  font-weight: 400;
+  line-height: 1.22;
   color: var(--white);
   margin-bottom: 32px;
 }
@@ -221,15 +232,12 @@ a { color: inherit; text-decoration: none; }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ================================================================
-   NAV
-   Sits below hero normally. Becomes fixed to top on scroll via JS.
+   NAV — in normal flow below hero, goes fixed on scroll via JS
    ================================================================ */
-#nav-sentinel {
-  height: 0;    /* zero-height sentinel that JS watches */
-}
+#nav-sentinel { height: 0; }
 
 #site-nav {
-  position: relative;       /* default: in normal flow below hero */
+  position: relative;
   z-index: 100;
   background: var(--charcoal);
   height: 44px;
@@ -238,8 +246,6 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   transition: box-shadow 0.3s;
 }
-
-/* Sticky state added by JS when nav scrolls to viewport top */
 #site-nav.is-sticky {
   position: fixed;
   top: 0;
@@ -248,11 +254,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 2px 16px rgba(0,0,0,0.4);
 }
 
-/* Placeholder that takes nav's space when nav goes fixed */
-#nav-placeholder {
-  display: none;
-  height: 44px;
-}
+#nav-placeholder { display: none; height: 44px; }
 #nav-placeholder.visible { display: block; }
 
 .nav-inner {
@@ -266,28 +268,24 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
 }
 
-.nav-links {
-  display: flex; align-items: center;
-  gap: 0; list-style: none;
-}
+.nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
 .nav-links li { display: flex; align-items: center; }
 .nav-links a {
   font-family: var(--sans);
   font-size: 0.58rem;
   font-weight: 400;
   letter-spacing: 0.06em;
-  color: rgba(255,255,255,1.0);    /* full opacity default */
+  color: rgba(255,255,255,1.0);
   transition: color 0.2s;
   padding: 0 10px;
   white-space: nowrap;
 }
-.nav-links a:hover { color: rgba(255,255,255,0.6); }   /* fade on hover */
+.nav-links a:hover { color: rgba(255,255,255,0.6); }
 .nav-links a.active { color: rgba(255,255,255,1.0); }
 .nav-links .sep { color: rgba(255,255,255,0.25); font-size: 0.6rem; user-select: none; padding: 0 2px; }
 
 .nav-li {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   color: rgba(255,255,255,1.0);
   transition: color 0.2s;
   padding: 0 10px;
@@ -344,7 +342,7 @@ a { color: inherit; text-decoration: none; }
 .body-text p {
   font-size: 0.9rem;
   font-weight: 300;
-  line-height: 1.7;           /* tighter than before */
+  line-height: 1.7;
   color: var(--mid);
   margin-bottom: 16px;
 }
@@ -498,7 +496,6 @@ a { color: inherit; text-decoration: none; }
   .hero-overlay { background: linear-gradient(to right, rgba(28,31,34,0.96) 0%, rgba(28,31,34,0.82) 65%, rgba(28,31,34,0.5) 100%); }
   .hero-content { padding-left: 28px; padding-right: 28px; padding-bottom: 32px; }
   .hero-name { white-space: normal; font-size: 1.2rem; }
-  .hero-rule { top: 88px; }
 
   .cred-grid { grid-template-columns: 1fr; }
   .cred-item { border-right: none; }
