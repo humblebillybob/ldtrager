@@ -1,6 +1,29 @@
 (function () {
   'use strict';
 
+  /* ── Rose rule: position exactly below hero-name after fonts load ──
+     Rule is position:absolute on #hero (z-index:1).
+     Photo-wrap is z-index:2 so it renders ON TOP of the rule.
+     We measure hero-name's bottom edge relative to #hero top.
+  ----------------------------------------------------------------- */
+  function positionHeroRule() {
+    const hero = document.getElementById('hero');
+    const name = document.getElementById('hero-name');
+    const rule = document.getElementById('hero-rule');
+    if (!hero || !name || !rule) return;
+    const heroRect = hero.getBoundingClientRect();
+    const nameRect = name.getBoundingClientRect();
+    rule.style.top = (nameRect.bottom - heroRect.top) + 'px';
+  }
+
+  // Run after fonts load for accurate measurement, then on resize
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionHeroRule);
+  } else {
+    window.addEventListener('load', positionHeroRule);
+  }
+  window.addEventListener('resize', positionHeroRule, { passive: true });
+
   /* ── Sticky nav ─────────────────────────────────────────────────
      Nav sits in normal flow below hero.
      Once it reaches the viewport top, it becomes fixed.
@@ -9,7 +32,6 @@
   const nav = document.getElementById('site-nav');
   const sentinel = document.getElementById('nav-sentinel');
 
-  // Insert placeholder immediately after nav
   const placeholder = document.createElement('div');
   placeholder.id = 'nav-placeholder';
   nav.after(placeholder);
