@@ -1,28 +1,66 @@
 (function () {
   'use strict';
 
-  /* ── Rose rule: position below hero-name after fonts load ──────────
-     Rule is a direct child of #hero (position:absolute, z-index:2).
-     hero-photo-fg is z-index:4 so it renders OVER the rule.
-     hero-content has no z-index so no sub-context is created.
-     We measure name bottom relative to #hero top.
-  ---------------------------------------------------------------- */
+  /* ── Rose rule: position + animate ─────────────────────────────────
+     - top: bottom edge of hero-name
+     - left: left edge of hero-name (so rule starts inline with text)
+     - width: from name-left to right viewport edge (100vw - nameLeft)
+     - On load: animates in from right using clip-path or transform
+  ----------------------------------------------------------------- */
   function positionHeroRule() {
     const hero = document.getElementById('hero');
     const name = document.getElementById('hero-name');
     const rule = document.getElementById('hero-rule');
     if (!hero || !name || !rule) return;
+
     const heroRect = hero.getBoundingClientRect();
     const nameRect = name.getBoundingClientRect();
-    rule.style.top = (nameRect.bottom - heroRect.top) + 'px';
+
+    // Vertical: bottom of name relative to top of #hero
+    const top = nameRect.bottom - heroRect.top;
+
+    // Horizontal: left edge of name relative to left of #hero
+    const left = nameRect.left - heroRect.left;
+
+    // Width: from name left edge all the way to the right viewport edge
+    const width = window.innerWidth - nameRect.left;
+
+    rule.style.top   = top + 'px';
+    rule.style.left  = left + 'px';
+    rule.style.right = 'auto';
+    rule.style.width = width + 'px';
   }
 
+  // Run immediately for initial placement, then after fonts for accuracy
   positionHeroRule();
-  document.fonts.ready.then(positionHeroRule);
+  document.fonts.ready.then(() => {
+    positionHeroRule();
+    animateHeroRule();
+  });
   window.addEventListener('load', positionHeroRule);
   window.addEventListener('resize', positionHeroRule, { passive: true });
 
-  /* ── Sticky nav ───────────────────────────────────────── */
+  /* ── Rule animation: slides in from right on load ─────────────────
+     Start with the rule fully clipped (width 0, anchored at left edge),
+     then expand to full width with an ease-out transition.
+  ----------------------------------------------------------------- */
+  function animateHeroRule() {
+    const rule = document.getElementById('hero-rule');
+    if (!rule) return;
+
+    // Start clipped to zero width from the left
+    rule.style.transition = 'none';
+    rule.style.clipPath   = 'inset(0 100% 0 0)';
+
+    // Force reflow so the starting state is painted
+    rule.getBoundingClientRect();
+
+    // Animate to full width
+    rule.style.transition = 'clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s';
+    rule.style.clipPath   = 'inset(0 0% 0 0)';
+  }
+
+  /* ── Sticky nav ───────────────────────────────────────────────── */
   const nav = document.getElementById('site-nav');
   const sentinel = document.getElementById('nav-sentinel');
   const placeholder = document.createElement('div');
@@ -39,7 +77,7 @@
   );
   stickyObs.observe(sentinel);
 
-  /* ── Active nav links ───────────────────────────────────── */
+  /* ── Active nav links ─────────────────────────────────────────── */
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   const sections = document.querySelectorAll('section[id]');
   function updateActive() {
@@ -50,7 +88,7 @@
   window.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
 
-  /* ── Smooth scroll ──────────────────────────────────────── */
+  /* ── Smooth scroll ────────────────────────────────────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
@@ -59,7 +97,7 @@
     });
   });
 
-  /* ── Mobile nav ───────────────────────────────────────── */
+  /* ── Mobile nav ───────────────────────────────────────────────── */
   const toggle = document.querySelector('.nav-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const closeBtn = document.querySelector('.mobile-close');
@@ -69,7 +107,7 @@
   closeBtn?.addEventListener('click', closeMob);
   mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMob));
 
-  /* ── Scroll reveal ──────────────────────────────────────── */
+  /* ── Scroll reveal ────────────────────────────────────────────── */
   if ('IntersectionObserver' in window) {
     const revObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -86,7 +124,7 @@
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
   }
 
-  /* ── Counter animation ───────────────────────────────────── */
+  /* ── Counter animation ────────────────────────────────────────── */
   if ('IntersectionObserver' in window) {
     const countObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -108,7 +146,7 @@
     document.querySelectorAll('.stat-num[data-target]').forEach(el => countObs.observe(el));
   }
 
-  /* ── Track tabs ───────────────────────────────────────── */
+  /* ── Track tabs ───────────────────────────────────────────────── */
   document.querySelectorAll('.track-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.track-tab').forEach(b => b.classList.remove('active'));
