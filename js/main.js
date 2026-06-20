@@ -1,35 +1,30 @@
 (function () {
   'use strict';
 
-  /* ── Rose rule: position exactly below hero-name after fonts load ──
-     Rule is position:absolute inside .hero-top (position:relative).
-     So top is measured relative to .hero-top's top edge.
-     Photo-wrap is z-index:2 in #hero context so it renders over rule.
-  ----------------------------------------------------------------- */
+  /* ── Rose rule: position below hero-name after fonts load ──────────
+     Rule is a direct child of #hero (position:absolute, z-index:2).
+     hero-photo-fg is z-index:4 so it renders OVER the rule.
+     hero-content has no z-index so no sub-context is created.
+     We measure name bottom relative to #hero top.
+  ---------------------------------------------------------------- */
   function positionHeroRule() {
+    const hero = document.getElementById('hero');
     const name = document.getElementById('hero-name');
     const rule = document.getElementById('hero-rule');
-    if (!name || !rule) return;
-    // top relative to .hero-top = name's offsetTop + name's offsetHeight
-    rule.style.top = (name.offsetTop + name.offsetHeight) + 'px';
+    if (!hero || !name || !rule) return;
+    const heroRect = hero.getBoundingClientRect();
+    const nameRect = name.getBoundingClientRect();
+    rule.style.top = (nameRect.bottom - heroRect.top) + 'px';
   }
 
-  // Run immediately, after fonts load, and on resize
   positionHeroRule();
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(positionHeroRule);
-  }
+  document.fonts.ready.then(positionHeroRule);
   window.addEventListener('load', positionHeroRule);
   window.addEventListener('resize', positionHeroRule, { passive: true });
 
-  /* ── Sticky nav ─────────────────────────────────────────────────
-     Nav sits in normal flow below hero.
-     Once it reaches the viewport top, it becomes fixed.
-     A placeholder div takes its space so content doesn't jump.
-  ----------------------------------------------------------------- */
+  /* ── Sticky nav ───────────────────────────────────────── */
   const nav = document.getElementById('site-nav');
   const sentinel = document.getElementById('nav-sentinel');
-
   const placeholder = document.createElement('div');
   placeholder.id = 'nav-placeholder';
   nav.after(placeholder);
@@ -44,43 +39,37 @@
   );
   stickyObs.observe(sentinel);
 
-  /* ── Active nav links on scroll ─────────────────────────── */
+  /* ── Active nav links ───────────────────────────────────── */
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   const sections = document.querySelectorAll('section[id]');
-
   function updateActive() {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 80) current = s.id;
-    });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
   }
   window.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
 
-  /* ── Smooth scroll (offset for nav height 44px) ──────────── */
+  /* ── Smooth scroll ──────────────────────────────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
       const el = document.getElementById(id);
-      if (el) {
-        e.preventDefault();
-        window.scrollTo({ top: el.offsetTop - 44, behavior: 'smooth' });
-      }
+      if (el) { e.preventDefault(); window.scrollTo({ top: el.offsetTop - 44, behavior: 'smooth' }); }
     });
   });
 
-  /* ── Mobile nav ──────────────────────────────────────────── */
+  /* ── Mobile nav ───────────────────────────────────────── */
   const toggle = document.querySelector('.nav-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const closeBtn = document.querySelector('.mobile-close');
-  const openMob  = () => { mobileNav.classList.add('open');    document.body.style.overflow = 'hidden'; toggle.setAttribute('aria-expanded', 'true');  };
-  const closeMob = () => { mobileNav.classList.remove('open'); document.body.style.overflow = '';       toggle.setAttribute('aria-expanded', 'false'); };
+  const openMob  = () => { mobileNav.classList.add('open');    document.body.style.overflow = 'hidden'; toggle.setAttribute('aria-expanded','true');  };
+  const closeMob = () => { mobileNav.classList.remove('open'); document.body.style.overflow = '';       toggle.setAttribute('aria-expanded','false'); };
   toggle?.addEventListener('click', openMob);
   closeBtn?.addEventListener('click', closeMob);
   mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMob));
 
-  /* ── Scroll reveal ───────────────────────────────────────── */
+  /* ── Scroll reveal ──────────────────────────────────────── */
   if ('IntersectionObserver' in window) {
     const revObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -102,12 +91,11 @@
     const countObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const el  = entry.target;
+        const el = entry.target;
         const end = parseFloat(el.dataset.target);
         const pre = el.dataset.prefix || '';
         const suf = el.dataset.suffix || '';
-        const dur = 1400;
-        const t0  = performance.now();
+        const dur = 1400, t0 = performance.now();
         const step = now => {
           const p = Math.min((now - t0) / dur, 1);
           el.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
@@ -120,7 +108,7 @@
     document.querySelectorAll('.stat-num[data-target]').forEach(el => countObs.observe(el));
   }
 
-  /* ── Track tabs ──────────────────────────────────────────── */
+  /* ── Track tabs ───────────────────────────────────────── */
   document.querySelectorAll('.track-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.track-tab').forEach(b => b.classList.remove('active'));

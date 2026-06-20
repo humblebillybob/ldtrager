@@ -13,30 +13,21 @@
 <body>
 
   <!-- HERO
-       z-index stack on #hero:
-         1 = .hero-headshot   (grey bg photo — bottommost)
-         2 = .hero-rule       (rose line — over headshot)
-         3 = .hero-overlay    (dark gradient)
-         4 = .hero-photo-fg   (transparent PNG — over rule + overlay)
-         5 = .hero-content    (text + CTAs — topmost)
+    z-index stack — ALL direct children of #hero, one stacking context:
+      1 = .hero-headshot  (grey bg photo)
+      2 = .hero-rule      (rose line, full width)
+      3 = .hero-overlay   (dark gradient)
+      4 = .hero-photo-fg  (transparent PNG, over rule)
+      5 = .hero-content   (text — NO z-index on this so it doesn’t create a sub-context)
   -->
   <section id="hero">
-    <!-- Layer 1: headshot background photo, own element -->
     <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-headshot" />
-
-    <!-- Layer 3: dark gradient overlay -->
+    <div class="hero-rule" id="hero-rule"></div>
     <div class="hero-overlay"></div>
-
-    <!-- Layer 4: transparent foreground PNG — sits OVER the rule -->
     <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
-
-    <!-- Layer 5: text content -->
     <div class="hero-content">
       <div class="hero-top">
         <h1 class="hero-name" id="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
-        <!-- Layer 2: rose rule — inside hero-top for left-edge alignment,
-             width:100vw, z-index sits between headshot and transparent PNG -->
-        <div class="hero-rule" id="hero-rule"></div>
         <p class="hero-roles">C-Suite Executive &nbsp;&middot;&nbsp; General Counsel &nbsp;&middot;&nbsp; Board Member</p>
       </div>
       <div class="hero-bottom">
@@ -85,7 +76,6 @@
     <a href="#connect">Connect</a>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-waves" aria-hidden="true"></div>
     <div class="container">
@@ -103,7 +93,6 @@
     </div>
   </section>
 
-  <!-- EXPERTISE -->
   <section id="expertise">
     <div class="expertise-waves" aria-hidden="true"></div>
     <div class="container">
@@ -123,7 +112,6 @@
     </div>
   </section>
 
-  <!-- BY THE NUMBERS -->
   <section id="numbers">
     <div class="numbers-bg" aria-hidden="true"></div>
     <div class="container">
@@ -138,7 +126,6 @@
     </div>
   </section>
 
-  <!-- WHERE I'M HEADED -->
   <section id="headed">
     <div class="container">
       <p class="eyebrow light">W H E R E &nbsp; I ' M &nbsp; H E A D E D</p>
@@ -167,7 +154,6 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="exp-waves" aria-hidden="true"></div>
     <div class="container">
@@ -188,7 +174,6 @@
     </div>
   </section>
 
-  <!-- CREDENTIALS -->
   <section id="credentials">
     <div class="cred-photo-wrap" aria-hidden="true">
       <img src="img/ucla-law.webp" alt="" class="cred-photo" />
@@ -205,7 +190,6 @@
     </div>
   </section>
 
-  <!-- CONNECT + FOOTER -->
   <section id="connect">
     <div class="connect-photo-wrap" aria-hidden="true">
       <img src="img/lisa-laughing.webp" alt="" class="connect-photo" />
