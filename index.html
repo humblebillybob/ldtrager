@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Lisa Donn Sergi Trager, Esq. — C-Suite Executive, General Counsel & Board Member." />
+  <meta name="description" content="Lisa Donn Sergi Trager, Esq. — C-Suite Executive, General Counsel &amp; Board Member." />
   <title>Lisa Donn Sergi Trager, Esq.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,18 +12,31 @@
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO
+       z-index stack on #hero:
+         1 = .hero-headshot   (grey bg photo — bottommost)
+         2 = .hero-rule       (rose line — over headshot)
+         3 = .hero-overlay    (dark gradient)
+         4 = .hero-photo-fg   (transparent PNG — over rule + overlay)
+         5 = .hero-content    (text + CTAs — topmost)
+  -->
   <section id="hero">
-    <div class="hero-photo-wrap">
-      <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-photo" />
-      <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
-    </div>
+    <!-- Layer 1: headshot background photo, own element -->
+    <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-headshot" />
+
+    <!-- Layer 3: dark gradient overlay -->
     <div class="hero-overlay"></div>
+
+    <!-- Layer 4: transparent foreground PNG — sits OVER the rule -->
+    <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
+
+    <!-- Layer 5: text content -->
     <div class="hero-content">
       <div class="hero-top">
-        <h1 class="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
-        <!-- Full-width rose rule running edge to edge behind the transparent photo -->
-        <div class="hero-rule"></div>
+        <h1 class="hero-name" id="hero-name">LISA DONN SERGI TRAGER, ESQ.</h1>
+        <!-- Layer 2: rose rule — inside hero-top for left-edge alignment,
+             width:100vw, z-index sits between headshot and transparent PNG -->
+        <div class="hero-rule" id="hero-rule"></div>
         <p class="hero-roles">C-Suite Executive &nbsp;&middot;&nbsp; General Counsel &nbsp;&middot;&nbsp; Board Member</p>
       </div>
       <div class="hero-bottom">
@@ -36,7 +49,7 @@
     </div>
   </section>
 
-  <!-- NAV -->
+  <div id="nav-sentinel"></div>
   <nav id="site-nav">
     <div class="nav-inner">
       <ul class="nav-links">
@@ -51,16 +64,19 @@
         <li><a href="#credentials">Credentials</a></li>
         <li class="sep">|</li>
         <li><a href="#connect">Connect</a></li>
+        <li class="sep">|</li>
+        <li>
+          <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="nav-li" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </li>
       </ul>
-      <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="nav-li" aria-label="LinkedIn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
   <div class="mobile-nav" id="mobile-nav">
-    <button class="mobile-close">✕</button>
+    <button class="mobile-close">&#x2715;</button>
     <a href="#about">About</a>
     <a href="#expertise">Expertise</a>
     <a href="#headed">Industry &amp; NGO</a>
@@ -88,7 +104,6 @@
   </section>
 
   <!-- EXPERTISE -->
-  <!-- The wave bg continues from about — it's all one continuous dark-to-light transition -->
   <section id="expertise">
     <div class="expertise-waves" aria-hidden="true"></div>
     <div class="container">
@@ -98,36 +113,12 @@
         <h2 class="serif-headline white">Where I add the most value.</h2>
       </div>
       <div class="cards-grid">
-        <div class="card reveal">
-          <h3>Executive Leadership</h3>
-          <div class="card-rule"></div>
-          <p><strong>CEO, CFO, and General Counsel</strong> experience with direct P&amp;L ownership, board governance, and enterprise-wide accountability across regulated, high-growth industries.</p>
-        </div>
-        <div class="card reveal">
-          <h3>Capital Markets &amp; Transactions</h3>
-          <div class="card-rule"></div>
-          <p><strong>$25MM+</strong> raised for a start-up over the last five years. <strong>$642MM</strong> M&amp;A executed. <strong>IPO</strong> on a public exchange. Senior secured debt. Equity financings. Fund formation. Across the full capital stack.</p>
-        </div>
-        <div class="card reveal">
-          <h3>Legal &amp; Regulatory</h3>
-          <div class="card-rule"></div>
-          <p>Multi-jurisdictional compliance, securities regulation, corporate governance, contract negotiation, and regulatory affairs. Built and managed legal functions across 14-state operational footprints.</p>
-        </div>
-        <div class="card reveal">
-          <h3>Finance &amp; Tax</h3>
-          <div class="card-rule"></div>
-          <p>Financial systems design, budget oversight, tax strategy, and alternative investment tax advisory, including <strong>ECI and UBTI structures for institutional investors</strong>.</p>
-        </div>
-        <div class="card reveal">
-          <h3>Crisis Navigation</h3>
-          <div class="card-rule"></div>
-          <p>Led organizations through federal regulatory crises, market volatility, and high-stakes industry disruption. Focused on solutions, stakeholder confidence, and organizational stability.</p>
-        </div>
-        <div class="card reveal">
-          <h3>Board Advisory</h3>
-          <div class="card-rule"></div>
-          <p>Served as Board Member with fiduciary responsibility across multiple organizations. Provides strategic counsel to boards navigating growth, governance challenges, and transformational decisions.</p>
-        </div>
+        <div class="card reveal"><h3>Executive Leadership</h3><div class="card-rule"></div><p><strong>CEO, CFO, and General Counsel</strong> experience with direct P&amp;L ownership, board governance, and enterprise-wide accountability across regulated, high-growth industries.</p></div>
+        <div class="card reveal"><h3>Capital Markets &amp; Transactions</h3><div class="card-rule"></div><p><strong>$25MM+</strong> raised for a start-up over the last five years. <strong>$642MM</strong> M&amp;A executed. <strong>IPO</strong> on a public exchange. Senior secured debt. Equity financings. Fund formation. Across the full capital stack.</p></div>
+        <div class="card reveal"><h3>Legal &amp; Regulatory</h3><div class="card-rule"></div><p>Multi-jurisdictional compliance, securities regulation, corporate governance, contract negotiation, and regulatory affairs. Built and managed legal functions across 14-state operational footprints.</p></div>
+        <div class="card reveal"><h3>Finance &amp; Tax</h3><div class="card-rule"></div><p>Financial systems design, budget oversight, tax strategy, and alternative investment tax advisory, including <strong>ECI and UBTI structures for institutional investors</strong>.</p></div>
+        <div class="card reveal"><h3>Crisis Navigation</h3><div class="card-rule"></div><p>Led organizations through federal regulatory crises, market volatility, and high-stakes industry disruption. Focused on solutions, stakeholder confidence, and organizational stability.</p></div>
+        <div class="card reveal"><h3>Board Advisory</h3><div class="card-rule"></div><p>Served as Board Member with fiduciary responsibility across multiple organizations. Provides strategic counsel to boards navigating growth, governance challenges, and transformational decisions.</p></div>
       </div>
     </div>
   </section>
@@ -138,24 +129,11 @@
     <div class="container">
       <p class="eyebrow">B Y &nbsp; T H E &nbsp; N U M B E R S</p>
       <h2 class="serif-headline navy reveal">A track record that speaks for<br>itself.</h2>
-      <!-- Stats overflow intentionally — horizontal scroll on small screens -->
       <div class="stats-row">
-        <div class="stat-item reveal">
-          <span class="stat-num" data-target="25" data-prefix="$" data-suffix="MM+">$25MM+</span>
-          <span class="stat-label">Capital Raised</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-target="642" data-prefix="$" data-suffix="MM">$642MM</span>
-          <span class="stat-label">M&amp;A Transaction<br>Executed</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-target="20" data-suffix="+ Years">20+ Years</span>
-          <span class="stat-label">Executive &amp; Legal<br>Leadership</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-target="14">14</span>
-          <span class="stat-label">Compliance<br>Footprint</span>
-        </div>
+        <div class="stat-item reveal"><span class="stat-num" data-target="25" data-prefix="$" data-suffix="MM+">$25MM+</span><span class="stat-label">Capital Raised</span></div>
+        <div class="stat-item reveal"><span class="stat-num" data-target="642" data-prefix="$" data-suffix="MM">$642MM</span><span class="stat-label">M&amp;A Transaction<br>Executed</span></div>
+        <div class="stat-item reveal"><span class="stat-num" data-target="20" data-suffix="+ Years">20+ Years</span><span class="stat-label">Executive &amp; Legal<br>Leadership</span></div>
+        <div class="stat-item reveal"><span class="stat-num" data-target="14">14</span><span class="stat-label">Compliance<br>Footprint</span></div>
       </div>
     </div>
   </section>
@@ -174,36 +152,16 @@
         <div class="track-box">
           <p class="track-desc">For growth-stage and established companies that need executive leadership with the legal, financial, and operational range to operate at the highest level and get deals done.</p>
           <p class="focus-label">F O C U S &nbsp; A R E A S</p>
-          <ul class="focus-list">
-            <li>Capital formation and M&amp;A execution</li>
-            <li>IPO readiness and public markets</li>
-            <li>General Counsel and enterprise legal strategy</li>
-            <li>CFO-level financial oversight and systems</li>
-            <li>Crisis management and regulatory navigation</li>
-            <li>Board governance and strategic advisory</li>
-          </ul>
-          <div class="track-ctas">
-            <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">Industry CV</a>
-            <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a>
-          </div>
+          <ul class="focus-list"><li>Capital formation and M&amp;A execution</li><li>IPO readiness and public markets</li><li>General Counsel and enterprise legal strategy</li><li>CFO-level financial oversight and systems</li><li>Crisis management and regulatory navigation</li><li>Board governance and strategic advisory</li></ul>
+          <div class="track-ctas"><a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">Industry CV</a><a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a></div>
         </div>
       </div>
       <div class="track-panel" id="panel-ngo">
         <div class="track-box">
           <p class="track-desc">For nonprofits and NGOs that need executive leadership with the financial discipline, governance expertise, and strategic vision to advance mission and ensure long-term sustainability.</p>
           <p class="focus-label">F O C U S &nbsp; A R E A S</p>
-          <ul class="focus-list">
-            <li>Fundraising strategy and capital development</li>
-            <li>Financial stewardship and budget oversight</li>
-            <li>Board governance and fiduciary leadership</li>
-            <li>Organizational resilience and change management</li>
-            <li>Stakeholder and community engagement</li>
-            <li>Regulatory compliance and ethical leadership</li>
-          </ul>
-          <div class="track-ctas">
-            <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">NGO CV</a>
-            <a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a>
-          </div>
+          <ul class="focus-list"><li>Fundraising strategy and capital development</li><li>Financial stewardship and budget oversight</li><li>Board governance and fiduciary leadership</li><li>Organizational resilience and change management</li><li>Stakeholder and community engagement</li><li>Regulatory compliance and ethical leadership</li></ul>
+          <div class="track-ctas"><a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-solid">NGO CV</a><a href="https://linkedin.com/in/lisadsergi" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a></div>
         </div>
       </div>
     </div>
@@ -220,42 +178,12 @@
         <p class="exp-sub">From Big Four advisory and AmLaw 100 firms to the C-suite of regulated, high-growth companies, every role in Lisa's career has been defined by enterprise-level accountability and measurable results.</p>
       </div>
       <div class="timeline">
-        <div class="tl-item reveal">
-          <h3 class="tl-role">BOARD MEMBER, CFO &amp; GENERAL COUNSEL</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>The Boston Garden, Boston, MA</strong> | 2020 - 2025</p>
-          <p class="tl-desc">Raised $25MM+ in capital, directed four ground-up historic property developments, and led financial strategy and board governance for a multi-state cannabis retail company.</p>
-        </div>
-        <div class="tl-item reveal">
-          <h3 class="tl-role">PRESIDENT &amp; CEO, GENERAL COUNSEL &amp; BOARD ADVISOR</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>PAX Labs, Inc., San Francisco, CA</strong> | 2019 - 2020</p>
-          <p class="tl-desc">Led full executive operations through federal regulatory crisis. Launched ERA Pro, earning TIME's Best of CES 2020. Managed compliance across 14 states.</p>
-        </div>
-        <div class="tl-item reveal">
-          <h3 class="tl-role">GENERAL COUNSEL &amp; BOARD MEMBER</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>MedMen Enterprises, LLC (CSE: MMEN), Los Angeles, CA</strong> | 2018 - 2019</p>
-          <p class="tl-desc">Executed a $642MM acquisition, an Up-C IPO on the Canadian Securities Exchange, and the cannabis industry's first senior secured debt financing.</p>
-        </div>
-        <div class="tl-item reveal">
-          <h3 class="tl-role">SENIOR PRINCIPAL, INVESTMENT MANAGEMENT TAX</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>Deloitte Tax, LLP, Los Angeles, CA</strong> | 2014 - 2018</p>
-          <p class="tl-desc">Lead tax partner for a $30B+ AUM private equity real estate fund, the firm's largest Los Angeles engagement. Advised institutional investors across alternative investment strategies.</p>
-        </div>
-        <div class="tl-item reveal">
-          <h3 class="tl-role">PRINCIPAL AND PRACTICE LEADER</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>Rothstein Kass (merged with KPMG), Los Angeles, CA</strong> | 2012 - 2014</p>
-          <p class="tl-desc">Managed the Los Angeles Alternative Investments Tax Practice, generating yearly fees in excess of $25 million and leading a staff of 40+ professionals.</p>
-        </div>
-        <div class="tl-item reveal">
-          <h3 class="tl-role">EARLIER CAREER, AMLAW 100 LAW FIRMS</h3>
-          <div class="tl-rule"></div>
-          <p class="tl-place"><strong>Proskauer Rose, LLP and O'Melveny and Myers, LLP</strong> | 2003 - 2010</p>
-          <p class="tl-desc">Built foundational expertise in legal strategy and complex transactions at two leading international law firms. Advised on M&amp;A, fund formation, joint ventures, restructurings, and real estate investments.</p>
-        </div>
+        <div class="tl-item reveal"><h3 class="tl-role">BOARD MEMBER, CFO &amp; GENERAL COUNSEL</h3><div class="tl-rule"></div><p class="tl-place"><strong>The Boston Garden, Boston, MA</strong> | 2020 - 2025</p><p class="tl-desc">Raised $25MM+ in capital, directed four ground-up historic property developments, and led financial strategy and board governance for a multi-state cannabis retail company.</p></div>
+        <div class="tl-item reveal"><h3 class="tl-role">PRESIDENT &amp; CEO, GENERAL COUNSEL &amp; BOARD ADVISOR</h3><div class="tl-rule"></div><p class="tl-place"><strong>PAX Labs, Inc., San Francisco, CA</strong> | 2019 - 2020</p><p class="tl-desc">Led full executive operations through federal regulatory crisis. Launched ERA Pro, earning TIME's Best of CES 2020. Managed compliance across 14 states.</p></div>
+        <div class="tl-item reveal"><h3 class="tl-role">GENERAL COUNSEL &amp; BOARD MEMBER</h3><div class="tl-rule"></div><p class="tl-place"><strong>MedMen Enterprises, LLC (CSE: MMEN), Los Angeles, CA</strong> | 2018 - 2019</p><p class="tl-desc">Executed a $642MM acquisition, an Up-C IPO on the Canadian Securities Exchange, and the cannabis industry's first senior secured debt financing.</p></div>
+        <div class="tl-item reveal"><h3 class="tl-role">SENIOR PRINCIPAL, INVESTMENT MANAGEMENT TAX</h3><div class="tl-rule"></div><p class="tl-place"><strong>Deloitte Tax, LLP, Los Angeles, CA</strong> | 2014 - 2018</p><p class="tl-desc">Lead tax partner for a $30B+ AUM private equity real estate fund, the firm's largest Los Angeles engagement. Advised institutional investors across alternative investment strategies.</p></div>
+        <div class="tl-item reveal"><h3 class="tl-role">PRINCIPAL AND PRACTICE LEADER</h3><div class="tl-rule"></div><p class="tl-place"><strong>Rothstein Kass (merged with KPMG), Los Angeles, CA</strong> | 2012 - 2014</p><p class="tl-desc">Managed the Los Angeles Alternative Investments Tax Practice, generating yearly fees in excess of $25 million and leading a staff of 40+ professionals.</p></div>
+        <div class="tl-item reveal"><h3 class="tl-role">EARLIER CAREER, AMLAW 100 LAW FIRMS</h3><div class="tl-rule"></div><p class="tl-place"><strong>Proskauer Rose, LLP and O'Melveny and Myers, LLP</strong> | 2003 - 2010</p><p class="tl-desc">Built foundational expertise in legal strategy and complex transactions at two leading international law firms. Advised on M&amp;A, fund formation, joint ventures, restructurings, and real estate investments.</p></div>
       </div>
     </div>
   </section>
@@ -269,31 +197,15 @@
     <div class="container cred-container">
       <p class="eyebrow light centered reveal">C R E D E N T I A L S</p>
       <div class="cred-grid">
-        <div class="cred-item reveal">
-          <h3>JURIS DOCTORATE</h3>
-          <div class="cred-rule"></div>
-          <p>UCLA School of Law<br>Los Angeles, CA</p>
-        </div>
-        <div class="cred-item reveal">
-          <h3>BAR ADMISSION</h3>
-          <div class="cred-rule"></div>
-          <p>State of California</p>
-        </div>
-        <div class="cred-item reveal">
-          <h3>BACHELOR OF<br>ARTS, ECONOMICS</h3>
-          <div class="cred-rule"></div>
-          <p>Oberlin College<br>Oberlin, OH</p>
-        </div>
-        <div class="cred-item reveal">
-          <h3>PROFESSIONAL<br>AFFILIATIONS</h3>
-          <div class="cred-rule"></div>
-          <p>American Bar Association,<br>California State Bar</p>
-        </div>
+        <div class="cred-item reveal"><h3>JURIS DOCTORATE</h3><div class="cred-rule"></div><p>UCLA School of Law<br>Los Angeles, CA</p></div>
+        <div class="cred-item reveal"><h3>BAR ADMISSION</h3><div class="cred-rule"></div><p>State of California</p></div>
+        <div class="cred-item reveal"><h3>BACHELOR OF<br>ARTS, ECONOMICS</h3><div class="cred-rule"></div><p>Oberlin College<br>Oberlin, OH</p></div>
+        <div class="cred-item reveal"><h3>PROFESSIONAL<br>AFFILIATIONS</h3><div class="cred-rule"></div><p>American Bar Association,<br>California State Bar</p></div>
       </div>
     </div>
   </section>
 
-  <!-- CONNECT + FOOTER — single dark section, laughing photo right, left-bordered content left -->
+  <!-- CONNECT + FOOTER -->
   <section id="connect">
     <div class="connect-photo-wrap" aria-hidden="true">
       <img src="img/lisa-laughing.webp" alt="" class="connect-photo" />
@@ -301,7 +213,6 @@
     <div class="container connect-container">
       <p class="eyebrow light reveal">C O N N E C T</p>
       <div class="eyebrow-rule light"></div>
-      <!-- Left border runs continuously from headline through CTA and footer info -->
       <div class="left-bordered light reveal">
         <h2 class="serif-headline white connect-head">Let's talk about<br>what's next.</h2>
         <p class="connect-body">If you're looking for executive leadership, board advisory, or general counsel support, reach out on LinkedIn. That's where I'm most responsive.</p>
@@ -309,7 +220,7 @@
         <div class="footer-block">
           <p class="footer-name">LISA DONN SERGI TRAGER, ESQ.</p>
           <p class="footer-loc">Los Angeles, CA</p>
-          <p class="footer-copy">© Lisa Donn Sergi Trager. All rights reserved.</p>
+          <p class="footer-copy">&copy; Lisa Donn Sergi Trager. All rights reserved.</p>
         </div>
       </div>
     </div>
