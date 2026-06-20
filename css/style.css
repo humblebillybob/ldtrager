@@ -1,14 +1,12 @@
 /* ================================================================
-   LISA DONN SERGI TRAGER — style.css v16
-   Key fix: .hero-rule is a direct child of #hero (same stacking
-   context as images). .hero-content has NO z-index so it doesn't
-   create a sub-context that would trap the rule above the photos.
-   z-index stack on #hero:
-     1 = .hero-headshot  (grey bg photo)
-     2 = .hero-rule      (rose line)
-     3 = .hero-overlay   (dark gradient)
-     4 = .hero-photo-fg  (transparent PNG, over rule)
-   .hero-content has position:relative but no z-index value.
+   LISA DONN SERGI TRAGER — style.css v17
+   Hero layering via DOM order only. NO z-index on images or rule.
+   Paint order (back to front = DOM order):
+     .hero-headshot  — grey bg photo
+     .hero-overlay   — dark gradient
+     .hero-rule      — rose line
+     .hero-photo-fg  — transparent PNG (paints over rule)
+     .hero-content   — text (last = topmost)
    ================================================================ */
 
 :root {
@@ -64,7 +62,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
-/* Both images: identical CSS, only z-index differs */
+/* Both images: identical position/size, no z-index — DOM order controls layering */
 .hero-headshot,
 .hero-photo-fg {
   position: absolute;
@@ -75,26 +73,13 @@ a { color: inherit; text-decoration: none; }
   max-width: none;
   object-fit: cover;
   object-position: center top;
-}
-.hero-headshot { z-index: 1; }
-.hero-photo-fg { z-index: 4; }
-
-/* Rose rule: direct child of #hero, z-index 2 — between headshot and overlay */
-.hero-rule {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--rose);
-  z-index: 2;
-  top: 108px; /* fallback; JS sets exact px after fonts load */
+  /* NO z-index — DOM order determines paint order */
 }
 
-/* Gradient overlay */
+/* Gradient: covers full hero, no z-index */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: 3;
   background: linear-gradient(
     to right,
     #1c1f22 35%,
@@ -102,12 +87,21 @@ a { color: inherit; text-decoration: none; }
     rgba(28,31,34,0.22) 70%,
     transparent 100%
   );
+  /* NO z-index */
 }
 
-/* Content: position:relative but NO z-index value.
-   This is critical — without z-index it does NOT create a new
-   stacking context, so it paints after z-index:4 in DOM order
-   but the rule/images/overlay all stack correctly in #hero context. */
+/* Rose rule: full width, no z-index — sits between overlay and transparent PNG in DOM */
+.hero-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rose);
+  top: 108px; /* fallback; JS sets exact px */
+  /* NO z-index */
+}
+
+/* Content: last in DOM so naturally paints on top. No z-index needed. */
 .hero-content {
   position: relative;
   height: 100%;
@@ -118,6 +112,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  /* NO z-index */
 }
 
 .hero-name {

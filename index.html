@@ -13,17 +13,18 @@
 <body>
 
   <!-- HERO
-    z-index stack — ALL direct children of #hero, one stacking context:
-      1 = .hero-headshot  (grey bg photo)
-      2 = .hero-rule      (rose line, full width)
-      3 = .hero-overlay   (dark gradient)
-      4 = .hero-photo-fg  (transparent PNG, over rule)
-      5 = .hero-content   (text — NO z-index on this so it doesn’t create a sub-context)
+    Layering via DOM order only — no z-index on images or rule.
+    Paint order (back to front):
+      1. .hero-headshot   — grey bg photo
+      2. .hero-overlay    — dark gradient
+      3. .hero-rule       — rose line (BETWEEN overlay and transparent PNG)
+      4. .hero-photo-fg   — transparent PNG paints OVER rule
+      5. .hero-content    — text (last in DOM = on top)
   -->
   <section id="hero">
     <img src="img/lisa-headshot.webp" alt="Lisa Donn Sergi Trager" class="hero-headshot" />
-    <div class="hero-rule" id="hero-rule"></div>
     <div class="hero-overlay"></div>
+    <div class="hero-rule" id="hero-rule"></div>
     <img src="img/lisa-hero.webp" alt="" class="hero-photo-fg" />
     <div class="hero-content">
       <div class="hero-top">
