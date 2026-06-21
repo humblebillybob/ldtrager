@@ -1,6 +1,6 @@
 /* ================================================================
-   LISA DONN SERGI TRAGER — style.css v20
-   Numbers: full-width h2, tabular-nums stops bounce, 2x2, bigger labels
+   LISA DONN SERGI TRAGER — style.css v21
+   stat-label: 1.5em
    ================================================================ */
 
 :root {
@@ -188,7 +188,6 @@ a { color: inherit; text-decoration: none; }
 .numbers-bg { position: absolute; inset: 0; background: url('../img/bg-geometric.webp') center / cover no-repeat; opacity: 0.28; pointer-events: none; }
 #numbers .container { position: relative; z-index: 1; }
 
-/* Headline: display:block + width:100% forces it full-width regardless of grid context */
 #numbers .serif-headline {
   display: block;
   width: 100%;
@@ -196,7 +195,6 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 56px;
 }
 
-/* 2×2 grid */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -207,9 +205,6 @@ a { color: inherit; text-decoration: none; }
   padding-right: 48px;
 }
 
-/* font-variant-numeric: tabular-nums makes every digit the same width,
-   so the counter never changes the text's layout width as it animates.
-   This is the correct fix for the bounce — no need for min-height hacks. */
 .stat-num {
   display: block;
   font-family: var(--sans);
@@ -222,11 +217,10 @@ a { color: inherit; text-decoration: none; }
   font-variant-numeric: tabular-nums;
 }
 
-/* Bigger, bolder labels */
 .stat-label {
   display: block;
   font-family: var(--sans);
-  font-size: 1rem;
+  font-size: 1.5em;
   font-weight: 700;
   color: var(--dark);
   line-height: 1.4;
@@ -323,7 +317,7 @@ a { color: inherit; text-decoration: none; }
   .hero-name { white-space: normal; font-size: 1.2rem; }
   .stats-row { gap: 40px 0; }
   .stat-num { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-  .stat-label { font-size: 0.9rem; }
+  .stat-label { font-size: 1.1em; }
   .cred-grid { grid-template-columns: 1fr; }
   .cred-item { border-right: none; }
   .cred-item:nth-child(3) { border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -335,5 +329,5 @@ a { color: inherit; text-decoration: none; }
   .hero-ctas { flex-direction: column; align-items: flex-start; }
   .track-tabs { flex-direction: column; }
   .stat-num { font-size: 2.2rem; }
-  .stat-label { font-size: 0.85rem; }
+  .stat-label { font-size: 1em; }
 }
