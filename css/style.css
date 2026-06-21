@@ -1,6 +1,6 @@
 /* ================================================================
-   LISA DONN SERGI TRAGER — style.css v18
-   Numbers section: grid layout so all 4 stats fit within viewport
+   LISA DONN SERGI TRAGER — style.css v19
+   Numbers: 2x2 grid, full-width headline, fixed height, bigger labels
    ================================================================ */
 
 :root {
@@ -183,42 +183,52 @@ a { color: inherit; text-decoration: none; }
 
 /* ================================================================
    BY THE NUMBERS
-   All 4 stats visible within the viewport, evenly spaced.
-   Grid: 4 equal columns, stat number scales with viewport.
+   2×2 grid. Headline full width. Fixed height on stat-num prevents
+   layout bounce during count-up animation. Bigger labels.
    ================================================================ */
-#numbers { position: relative; padding: var(--pad) 0 0; background: #edf1f6; overflow: hidden; }
+#numbers { position: relative; padding: var(--pad) 0 var(--pad); background: #edf1f6; overflow: hidden; }
 .numbers-bg { position: absolute; inset: 0; background: url('../img/bg-geometric.webp') center / cover no-repeat; opacity: 0.28; pointer-events: none; }
 #numbers .container { position: relative; z-index: 1; }
-#numbers .serif-headline { font-size: clamp(2rem, 3.8vw, 3.4rem); margin-bottom: 48px; }
 
-/* Grid: 4 equal columns, contained within the container */
+/* Full-width headline — no max-width constraint */
+#numbers .serif-headline {
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  margin-bottom: 56px;
+  width: 100%;
+}
+
+/* 2×2 grid with generous row gap */
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  padding-bottom: 80px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 56px 0;
 }
 
 .stat-item {
-  padding-right: 24px;
+  padding-right: 40px;
 }
 
-/* Font scales with column width to stay readable but never overflow */
+/* Fixed height prevents layout bounce during count-up.
+   Height is set to accommodate the tallest possible value. */
 .stat-num {
   display: block;
   font-family: var(--sans);
-  font-size: clamp(2rem, 4.5vw, 5rem);
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 1;
   color: var(--dark);
   letter-spacing: -0.04em;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  /* Fixed height stops the container jumping as digits change */
+  min-height: 1.05em;
+  overflow: hidden;
 }
 
+/* Bigger labels — more prominent under the numbers */
 .stat-label {
   display: block;
   font-family: var(--sans);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--dark);
   line-height: 1.4;
@@ -301,7 +311,6 @@ a { color: inherit; text-decoration: none; }
   .cards-grid { grid-template-columns: 1fr; gap: 10px; }
   .cred-grid { grid-template-columns: 1fr 1fr; }
   .connect-photo-wrap { width: 40%; }
-  .stat-num { font-size: clamp(1.8rem, 4vw, 3.5rem); }
 }
 
 @media (max-width: 768px) {
@@ -314,9 +323,9 @@ a { color: inherit; text-decoration: none; }
   .hero-overlay { background: linear-gradient(to right, rgba(28,31,34,0.96) 0%, rgba(28,31,34,0.82) 65%, rgba(28,31,34,0.5) 100%); }
   .hero-content { padding-left: 28px; padding-right: 28px; padding-bottom: 32px; }
   .hero-name { white-space: normal; font-size: 1.2rem; }
-  /* 2-col grid on mobile */
-  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 40px 0; }
-  .stat-num { font-size: clamp(2rem, 8vw, 3rem); }
+  .stats-row { gap: 40px 0; }
+  .stat-num { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+  .stat-label { font-size: 0.85rem; }
   .cred-grid { grid-template-columns: 1fr; }
   .cred-item { border-right: none; }
   .cred-item:nth-child(3) { border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -327,6 +336,6 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 480px) {
   .hero-ctas { flex-direction: column; align-items: flex-start; }
   .track-tabs { flex-direction: column; }
-  .stats-row { grid-template-columns: 1fr 1fr; }
-  .stat-num { font-size: 2rem; }
+  .stat-num { font-size: 2.2rem; }
+  .stat-label { font-size: 0.8rem; }
 }
