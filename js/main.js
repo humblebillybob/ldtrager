@@ -5,7 +5,7 @@
      - top: bottom edge of hero-name
      - left: left edge of hero-name (so rule starts inline with text)
      - width: from name-left to right viewport edge (100vw - nameLeft)
-     - On load: animates in from right using clip-path or transform
+     - On load: animates LEFT to RIGHT (clip sweeps from right side inward)
   ----------------------------------------------------------------- */
   function positionHeroRule() {
     const hero = document.getElementById('hero');
@@ -16,13 +16,8 @@
     const heroRect = hero.getBoundingClientRect();
     const nameRect = name.getBoundingClientRect();
 
-    // Vertical: bottom of name relative to top of #hero
-    const top = nameRect.bottom - heroRect.top;
-
-    // Horizontal: left edge of name relative to left of #hero
-    const left = nameRect.left - heroRect.left;
-
-    // Width: from name left edge all the way to the right viewport edge
+    const top   = nameRect.bottom - heroRect.top;
+    const left  = nameRect.left - heroRect.left;
     const width = window.innerWidth - nameRect.left;
 
     rule.style.top   = top + 'px';
@@ -31,7 +26,6 @@
     rule.style.width = width + 'px';
   }
 
-  // Run immediately for initial placement, then after fonts for accuracy
   positionHeroRule();
   document.fonts.ready.then(() => {
     positionHeroRule();
@@ -40,23 +34,25 @@
   window.addEventListener('load', positionHeroRule);
   window.addEventListener('resize', positionHeroRule, { passive: true });
 
-  /* ── Rule animation: slides in from right on load ─────────────────
-     Start with the rule fully clipped (width 0, anchored at left edge),
-     then expand to full width with an ease-out transition.
+  /* ── Rule animation: slides LEFT to RIGHT, 2x slower (1.8s) ──────
+     clip-path inset(0 100% 0 0) = fully clipped from the RIGHT side
+       → means nothing visible (right edge clips everything)
+     clip-path inset(0 0% 0 0)   = fully visible
+     This causes the reveal to sweep from left to right.
   ----------------------------------------------------------------- */
   function animateHeroRule() {
     const rule = document.getElementById('hero-rule');
     if (!rule) return;
 
-    // Start clipped to zero width from the left
+    // Start fully clipped from the right (nothing visible)
     rule.style.transition = 'none';
     rule.style.clipPath   = 'inset(0 100% 0 0)';
 
-    // Force reflow so the starting state is painted
+    // Force reflow so the starting state is painted before transition begins
     rule.getBoundingClientRect();
 
-    // Animate to full width
-    rule.style.transition = 'clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s';
+    // Sweep left-to-right: right clip shrinks from 100% → 0% over 1.8s
+    rule.style.transition = 'clip-path 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s';
     rule.style.clipPath   = 'inset(0 0% 0 0)';
   }
 
